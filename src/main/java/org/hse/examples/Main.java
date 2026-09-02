@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        int digitsCount = 6;
+        int digitsCount = 8;
         int denominator = (int) Math.pow(10, (double) digitsCount / 2);
 
         long start = System.currentTimeMillis();
