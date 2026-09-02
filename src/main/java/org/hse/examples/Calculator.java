@@ -49,7 +49,7 @@ class CalculatorStreamImpl<T extends Predicate<Integer>> implements Calculator {
 
     @Override
     public int calculate() {
-        return (int) IntStream.range(0, (int) Math.pow(10, digitsCount)).filter(checker::test).count();
+        return (int) IntStream.range(0, (int) Math.pow(10, digitsCount)).parallel().filter(checker::test).count();
     }
 }
 
