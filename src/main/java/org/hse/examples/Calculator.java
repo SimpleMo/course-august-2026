@@ -36,3 +36,20 @@ class CalculatorImpl<T extends Predicate<Integer>> implements Calculator {
         return count;
     }
 }
+
+
+class CalculatorStreamImpl<T extends Predicate<Integer>> implements Calculator {
+    private final T checker;
+    private final int digitsCount;
+
+    CalculatorStreamImpl(T checker, int digitsCount) {
+        this.checker = checker;
+        this.digitsCount = digitsCount;
+    }
+
+    @Override
+    public int calculate() {
+        return (int) IntStream.range(0, (int) Math.pow(10, digitsCount)).filter(checker::test).count();
+    }
+}
+

@@ -12,11 +12,8 @@ public class Main {
 
         long start = System.currentTimeMillis();
         CheckBySumm checker = new CheckBySumm(denominator);
-        Calculator calculator =
-                new CalculatorImpl<>((Function<Integer, Predicate<Integer>>) dc -> checker::check, digitsCount);
+        Calculator calculator = new CalculatorStreamImpl<>(checker::check, digitsCount);
         int count = calculator.calculate();
-        System.out.printf("Билет 1001 счастливый? %s\n", checker.check(1001));
-        System.out.printf("Билет 1011 счастливый? %s\n", checker.check(1011));
 
         long end = System.currentTimeMillis();
 
