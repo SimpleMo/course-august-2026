@@ -1,4 +1,4 @@
-package org.hse.examples;
+package org.hse.examples.business;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.*;

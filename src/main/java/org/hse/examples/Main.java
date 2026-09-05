@@ -1,18 +1,17 @@
 package org.hse.examples;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
+import org.hse.examples.business.Calculator;
+import org.hse.examples.business.CalculatorFactory;
+import org.hse.examples.business.CalculatorFactoryImpl;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        int digitsCount = 8;
-        int denominator = (int) Math.pow(10, (double) digitsCount / 2);
+    private static CalculatorFactory factory = new CalculatorFactoryImpl();
 
+    public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        CheckBySumm checker = new CheckBySumm(denominator);
-        Calculator calculator = new CalculatorStreamImpl<>(checker::check, digitsCount);
+        Calculator calculator = factory.create(8);
         int count = calculator.calculate();
 
         long end = System.currentTimeMillis();

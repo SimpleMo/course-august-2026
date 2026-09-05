@@ -1,4 +1,4 @@
-package org.hse.examples;
+package org.hse.examples.business;
 
 public class CheckBySumm {
     private final int denominator;

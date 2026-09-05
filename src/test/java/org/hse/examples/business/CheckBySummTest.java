@@ -1,6 +1,5 @@
-package org.hse.examples;
+package org.hse.examples.business;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
