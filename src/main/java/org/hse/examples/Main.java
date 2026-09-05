@@ -1,25 +1,39 @@
 package org.hse.examples;
 
+import org.hse.examples.business.ApplicationContext;
 import org.hse.examples.business.Calculator;
-import org.hse.examples.business.CalculatorFactory;
-import org.hse.examples.business.StreamCalculatorFactoryImpl;
+
+import java.util.List;
+import java.util.Optional;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    private static CalculatorFactory factory = new StreamCalculatorFactoryImpl();
+    private static final ApplicationContext context = ApplicationContext.getContext();
 
     public static void main(String[] args) {
+        var prefs = List.of("stream", "simple");
+        var numbers = List.of(6, 8);
+
+        prefs.forEach(pref -> numbers.forEach(num -> process(pref, num)));
+    }
+
+    private static void process(String prefix, Integer number) {
         long start = System.currentTimeMillis();
-        Calculator calculator = factory.create(8);
-        int count = calculator.calculate();
+
+        String calculatorName = String.format("%s%dDigitsCalculator", prefix, number);
+        Optional<Calculator> calculator = context.getInstance(calculatorName, Calculator.class);
+
+        System.out.printf("Работает %s...\n", calculatorName);
+
+        int count = calculator.map(Calculator::calculate).orElseThrow();
 
         long end = System.currentTimeMillis();
 
         String output = String.format("""
-                Всего %d счастливых билетов.
-                Расчёт продолжался %d мс.""", count, end - start);
+        Всего %d счастливых билетов.
+        Расчёт продолжался %d мс.""", count, end - start);
 
-        System.out.print(output);
+        System.out.println(output);
     }
 }
