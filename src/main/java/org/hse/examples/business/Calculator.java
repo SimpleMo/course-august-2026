@@ -1,9 +1,9 @@
-package org.hse.examples;
+package org.hse.examples.business;
 
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
-interface Calculator {
+public interface Calculator {
 
     int calculate();
 }
