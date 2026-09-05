@@ -1,7 +1,7 @@
 package org.hse.examples.business;
 
 /**
- * Реализация {@link Calculator}
+ * Реализация {@link CalculatorFactory}
  */
 public class CalculatorFactoryImpl implements CalculatorFactory {
 

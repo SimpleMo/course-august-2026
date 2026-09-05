@@ -2,12 +2,12 @@ package org.hse.examples;
 
 import org.hse.examples.business.Calculator;
 import org.hse.examples.business.CalculatorFactory;
-import org.hse.examples.business.CalculatorFactoryImpl;
+import org.hse.examples.business.StreamCalculatorFactoryImpl;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    private static CalculatorFactory factory = new CalculatorFactoryImpl();
+    private static CalculatorFactory factory = new StreamCalculatorFactoryImpl();
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
