@@ -1,6 +1,5 @@
 package org.hse.examples;
 
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
@@ -16,11 +15,6 @@ class CalculatorImpl<T extends Predicate<Integer>> implements Calculator {
 
     CalculatorImpl(T checker, int digitsCount) {
         this.checker = checker;
-        this.digitsCount = digitsCount;
-    }
-
-    CalculatorImpl(Function<Integer, T> supplier, int digitsCount) {
-        this.checker = supplier.apply(digitsCount);
         this.digitsCount = digitsCount;
     }
 
