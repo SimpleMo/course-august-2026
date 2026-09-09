@@ -1,4 +1,9 @@
-package org.hse.examples.business;
+package org.hse.examples.infrastructure;
+
+import org.hse.examples.application.Calculator;
+import org.hse.examples.application.CalculatorImpl;
+import org.hse.examples.application.CalculatorStreamImpl;
+import org.hse.examples.domain.Check;
 
 import java.util.HashMap;
 import java.util.Map;

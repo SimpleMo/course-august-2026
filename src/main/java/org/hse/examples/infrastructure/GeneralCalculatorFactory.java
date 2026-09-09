@@ -1,4 +1,8 @@
-package org.hse.examples.business;
+package org.hse.examples.infrastructure;
+
+import org.hse.examples.application.Calculator;
+import org.hse.examples.domain.Check;
+import org.hse.examples.domain.CheckBySumm;
 
 import java.util.function.BiFunction;
 

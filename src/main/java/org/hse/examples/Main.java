@@ -1,7 +1,7 @@
 package org.hse.examples;
 
-import org.hse.examples.business.ApplicationContext;
-import org.hse.examples.business.Calculator;
+import org.hse.examples.infrastructure.ApplicationContext;
+import org.hse.examples.application.Calculator;
 
 import java.util.List;
 import java.util.Optional;

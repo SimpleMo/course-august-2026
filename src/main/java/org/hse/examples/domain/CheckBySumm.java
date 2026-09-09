@@ -1,9 +1,9 @@
-package org.hse.examples.business;
+package org.hse.examples.domain;
 
 public class CheckBySumm implements Check {
     private final int denominator;
 
-    CheckBySumm(int denominator) {
+    public CheckBySumm(int denominator) {
         if (denominator < 0) {
             throw new IllegalArgumentException("Знаменатель меньше нуля!");
         }
@@ -20,10 +20,10 @@ public class CheckBySumm implements Check {
             throw new IllegalArgumentException(String.format("Номер %d вне диапазона [0, %d)", number, maxNumber));
         }
 
-        return get_digits_summ(number / denominator) == get_digits_summ(number % denominator);
+        return getDigitsSumm(number / denominator) == getDigitsSumm(number % denominator);
     }
 
-    private int get_digits_summ(int number) {
+    private int getDigitsSumm(int number) {
         int digitsSumm = 0;
         for(int i = number; i > 0; i /= 10) {
             digitsSumm += i % 10;

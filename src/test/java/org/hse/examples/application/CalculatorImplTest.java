@@ -1,5 +1,8 @@
-package org.hse.examples.business;
+package org.hse.examples.application;
 
+import org.hse.examples.application.Calculator;
+import org.hse.examples.application.CalculatorImpl;
+import org.hse.examples.domain.CheckBySumm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
