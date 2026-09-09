@@ -1,4 +1,4 @@
-package org.hse.examples.business;
+package org.hse.examples.domain;
 
 import org.junit.jupiter.api.*;
 

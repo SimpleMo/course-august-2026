@@ -1,4 +1,6 @@
-package org.hse.examples.business;
+package org.hse.examples.infrastructure;
+
+import org.hse.examples.application.Calculator;
 
 /**
  * Создаёт экземпляры {@link Calculator}, готовые к работе

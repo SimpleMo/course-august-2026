@@ -1,4 +1,4 @@
-package org.hse.examples.business;
+package org.hse.examples.domain;
 
 /**
  * Предоставляет метод для проверки, является ли билет с переданным номером счастливым
