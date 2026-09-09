@@ -1,6 +1,5 @@
 package org.hse.examples.business;
 
-import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 public interface Calculator {
@@ -8,12 +7,12 @@ public interface Calculator {
     int calculate();
 }
 
-class CalculatorImpl<T extends Predicate<Integer>> implements Calculator {
+class CalculatorImpl implements Calculator {
 
-    private final T checker;
+    private final Check checker;
     private final int digitsCount;
 
-    CalculatorImpl(T checker, int digitsCount) {
+    CalculatorImpl(Check checker, int digitsCount) {
         this.checker = checker;
         this.digitsCount = digitsCount;
     }
@@ -22,7 +21,7 @@ class CalculatorImpl<T extends Predicate<Integer>> implements Calculator {
     public int calculate() {
         int count = 0;
         for(int i = 0; i < Math.pow(10, digitsCount); i++) {
-            if (checker.test(i)) {
+            if (checker.check(i)) {
                 count++;
             }
         }
@@ -32,18 +31,18 @@ class CalculatorImpl<T extends Predicate<Integer>> implements Calculator {
 }
 
 
-class CalculatorStreamImpl<T extends Predicate<Integer>> implements Calculator {
-    private final T checker;
+class CalculatorStreamImpl implements Calculator {
+    private final Check checker;
     private final int digitsCount;
 
-    CalculatorStreamImpl(T checker, int digitsCount) {
+    CalculatorStreamImpl(Check checker, int digitsCount) {
         this.checker = checker;
         this.digitsCount = digitsCount;
     }
 
     @Override
     public int calculate() {
-        return (int) IntStream.range(0, (int) Math.pow(10, digitsCount)).parallel().filter(checker::test).count();
+        return (int) IntStream.range(0, (int) Math.pow(10, digitsCount)).parallel().filter(checker::check).count();
     }
 }
 

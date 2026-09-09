@@ -10,6 +10,6 @@ public class CalculatorFactoryImpl implements CalculatorFactory {
         var denominator = (int) Math.pow(10, digitsCount / 2);
         var checker = new CheckBySumm(denominator);
 
-        return new CalculatorImpl<>(checker::check, digitsCount);
+        return new CalculatorImpl(checker, digitsCount);
     }
 }

@@ -28,7 +28,7 @@ class CalculatorImplTest {
     @DisplayName("Проверяет подсчёт счастливых билетов")
     void allTicketsShouldBeCounted(int digitsCount) {
         // given
-        Calculator service = new CalculatorImpl<>(check::check, digitsCount);
+        Calculator service = new CalculatorImpl(check, digitsCount);
         int expected = (int) Math.pow(10, digitsCount);
 
         // when

@@ -9,6 +9,6 @@ public class StreamCalculatorFactoryImpl implements CalculatorFactory{
         var denominator = (int) Math.pow(10, digitsCount / 2);
         var checker = new CheckBySumm(denominator);
 
-        return new CalculatorStreamImpl<>(checker::check, digitsCount);
+        return new CalculatorStreamImpl(checker, digitsCount);
     }
 }

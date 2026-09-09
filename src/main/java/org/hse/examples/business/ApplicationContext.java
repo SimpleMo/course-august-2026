@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Predicate;
 
 /**
  * Создаёт необходимые для работы приложения объекты и обеспечивает к ним доступ
@@ -32,8 +31,8 @@ class ApplicationContextImpl implements ApplicationContext {
     private final Map<String, Object> context = new HashMap<>();
 
     ApplicationContextImpl() {
-        BiFunction<Predicate<Integer>, Integer, Calculator> simpleCalculatorConstructor = CalculatorImpl::new;
-        BiFunction<Predicate<Integer>, Integer, Calculator> streamCalculatorConstructor = CalculatorStreamImpl::new;
+        BiFunction<Check, Integer, Calculator> simpleCalculatorConstructor = CalculatorImpl::new;
+        BiFunction<Check, Integer, Calculator> streamCalculatorConstructor = CalculatorStreamImpl::new;
 
         CalculatorFactory simpleCalculatorFactory = new GeneralCalculatorFactory(simpleCalculatorConstructor);
         CalculatorFactory streamCalculatorFactory = new GeneralCalculatorFactory(streamCalculatorConstructor);

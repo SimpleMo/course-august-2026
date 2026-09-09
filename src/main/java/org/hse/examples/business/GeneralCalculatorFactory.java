@@ -1,15 +1,14 @@
 package org.hse.examples.business;
 
 import java.util.function.BiFunction;
-import java.util.function.Predicate;
 
 /**
  * Универсальная фабрика {@link Calculator}
  */
 public class GeneralCalculatorFactory implements CalculatorFactory{
-    private final BiFunction<Predicate<Integer>, Integer, Calculator> constructor;
+    private final BiFunction<Check, Integer, Calculator> constructor;
 
-    public GeneralCalculatorFactory(BiFunction<Predicate<Integer>, Integer, Calculator> constructor) {
+    public GeneralCalculatorFactory(BiFunction<Check, Integer, Calculator> constructor) {
         this.constructor = constructor;
     }
 
@@ -18,6 +17,6 @@ public class GeneralCalculatorFactory implements CalculatorFactory{
         var denominator = (int) Math.pow(10, digitsCount / 2);
         var checker = new CheckBySumm(denominator);
 
-        return constructor.apply(checker::check, digitsCount);
+        return constructor.apply(checker, digitsCount);
     }
 }

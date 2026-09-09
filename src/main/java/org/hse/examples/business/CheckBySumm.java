@@ -1,6 +1,6 @@
 package org.hse.examples.business;
 
-public class CheckBySumm {
+public class CheckBySumm implements Check {
     private final int denominator;
 
     CheckBySumm(int denominator) {
@@ -13,6 +13,7 @@ public class CheckBySumm {
         this.denominator = denominator;
     }
 
+    @Override
     public boolean check(int number) {
         int maxNumber = denominator * denominator;
         if (number < 0 || number >= maxNumber) {
