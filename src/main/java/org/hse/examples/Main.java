@@ -1,32 +1,55 @@
 package org.hse.examples;
 
-import org.hse.examples.infrastructure.ApplicationContext;
+import lombok.RequiredArgsConstructor;
 import org.hse.examples.application.Calculator;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Collection;
+import java.util.Map;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    private static final ApplicationContext context = ApplicationContext.getContext();
+@SpringBootApplication
+@RequiredArgsConstructor
+public class Main implements CommandLineRunner {
+
+    private final Collection<Calculator> calculators;
+    private final Map<String, Calculator> namedCalculator;
 
     public static void main(String[] args) {
-        var prefs = List.of("stream", "simple");
-        var numbers = List.of(6, 8);
-
-        prefs.forEach(pref -> numbers.forEach(num -> process(pref, num)));
+        SpringApplication.run(Main.class);
     }
 
-    private static void process(String prefix, Integer number) {
+    @Override
+    public void run(String... args) throws Exception {
+        calculators.forEach(Main::process);
+        namedCalculator.forEach(Main::process);
+    }
+
+    private static void process(Calculator calculator) {
         long start = System.currentTimeMillis();
 
-        String calculatorName = String.format("%s%dDigitsCalculator", prefix, number);
-        Optional<Calculator> calculator = context.getInstance(calculatorName, Calculator.class);
+        System.out.printf("Работает %s...\n", calculator.toString());
+
+        int count = calculator.calculate();
+
+        long end = System.currentTimeMillis();
+
+        String output = String.format("""
+        Всего %d счастливых билетов.
+        Расчёт продолжался %d мс.""", count, end - start);
+
+        System.out.println(output);
+    }
+
+    private static void process(String calculatorName, Calculator calculator) {
+        long start = System.currentTimeMillis();
 
         System.out.printf("Работает %s...\n", calculatorName);
 
-        int count = calculator.map(Calculator::calculate).orElseThrow();
+        int count = calculator.calculate();
 
         long end = System.currentTimeMillis();
 
