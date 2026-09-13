@@ -1,5 +1,8 @@
 package org.hse.examples.domain;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class CheckBySumm implements Check {
     private final int denominator;
 
@@ -10,6 +13,8 @@ public class CheckBySumm implements Check {
         if (denominator % 10 != 0) {
             throw new IllegalArgumentException("Знаменатель должен быть кратен десяти!");
         }
+
+        log.debug("Объект CheckBySum создан!");
         this.denominator = denominator;
     }
 
