@@ -78,6 +78,6 @@ public class Config {
 
     @Bean
     Collection<String> calculatorNames() {
-        return List.of("stream6DigitsCalculator", "simple8DigitsCalculator", "simple6DigitsCalculator", "stream8DigitsCalculator");
+        return List.of("stream6DigitsCalculator", "simple8DigitsCalculator", "simple6DigitsCalculator", "stream8DigitsCalculator", "simple10DigitsCalculator");
     }
 }

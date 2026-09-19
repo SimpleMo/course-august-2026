@@ -1,5 +1,6 @@
 package org.hse.examples.rest;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hse.examples.application.Calculator;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.NoSuchElementException;
 
 /**
  * Rest-контроллер для работы со счастливыми билетами
@@ -29,7 +29,12 @@ public class CalculatorController {
 
     @GetMapping("/{calculatorName}")
     public GetTicketsResponse getTicket(@PathVariable String calculatorName) {
-        return calculatorNames.stream().filter(calculatorName::equals).findFirst().map(this::process).orElseThrow();
+        return calculatorNames
+                .stream()
+                .filter(calculatorName::equals)
+                .findFirst()
+                .map(this::process)
+                .orElseThrow(() -> new CalculatorNotFoundException(calculatorName));
     }
 
     private GetTicketsResponse process(String calculatorName) {
@@ -45,14 +50,24 @@ public class CalculatorController {
         return new GetTicketsResponse(calculatorName, count, end - start);
     }
 
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ErrorResponse> handleNoSuchElementException(NoSuchElementException ex) {
-        log.warn("Запрошен неизвестный калькулятор. {}", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()));
+    @ExceptionHandler(CalculatorNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNoSuchElementException(CalculatorNotFoundException ex) {
+        log.warn("Запрошен неизвестный калькулятор:", ex);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getName()));
     }
 
     record GetTicketsResponse(String name, Integer count, Long duration) { }
 
     record ErrorResponse(int status, String message) { }
+
+    static class CalculatorNotFoundException extends RuntimeException {
+        @Getter
+        private final String name;
+
+        CalculatorNotFoundException(String name) {
+            super(String.format("Калькулятор %s не найден!", name));
+            this.name = name;
+        }
+    }
 
 }
