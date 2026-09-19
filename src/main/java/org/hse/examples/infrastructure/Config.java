@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -72,5 +74,10 @@ public class Config {
     Function<Integer, Check> checkBySumm() {
         log.debug("Создан checkBySumm");
         return CheckBySumm::new;
+    }
+
+    @Bean
+    Collection<String> calculatorNames() {
+        return List.of("stream6DigitsCalculator", "simple8DigitsCalculator", "simple6DigitsCalculator", "stream8DigitsCalculator", "simple10DigitsCalculator");
     }
 }
