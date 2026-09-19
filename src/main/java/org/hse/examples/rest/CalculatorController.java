@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hse.examples.application.Calculator;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Rest-контроллер для работы со счастливыми билетами
@@ -20,8 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/tickets")
 public class CalculatorController {
-    private final Collection<String> calculatorNames =
-            List.of("stream6DigitsCalculator", "simple8DigitsCalculator", "simple6DigitsCalculator","stream8DigitsCalculator");
+    private final Collection<String> calculatorNames;
     private final ApplicationContext context;
 
     @GetMapping
@@ -47,6 +47,14 @@ public class CalculatorController {
         return new GetTicketsResponse(calculatorName, count, end - start);
     }
 
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ErrorResponse> handleNoSuchElementException(NoSuchElementException ex) {
+        log.warn("Запрошен неизвестный калькулятор. {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()));
+    }
+
     record GetTicketsResponse(String name, Integer count, Long duration) { }
+
+    record ErrorResponse(int status, String message) { }
 
 }
