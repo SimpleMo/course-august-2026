@@ -1,5 +1,7 @@
 package org.hse.examples.infrastructure;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.hse.examples.application.Calculator;
 import org.hse.examples.application.CalculatorImpl;
@@ -11,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Collection;
 import java.util.List;
@@ -79,5 +82,10 @@ public class Config {
     @Bean
     Collection<String> calculatorNames() {
         return List.of("stream6DigitsCalculator", "simple8DigitsCalculator", "simple6DigitsCalculator", "stream8DigitsCalculator", "simple10DigitsCalculator");
+    }
+
+    @Bean
+    ObjectMapper objectMapper() {
+        return JsonMapper.builder().serializationInclusion(JsonInclude.Include.ALWAYS).build();
     }
 }
